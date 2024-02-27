@@ -12,18 +12,16 @@ spring:
   mvc:
     format:
       date-time: iso
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/ms_user?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Sao_Paulo
-    username: root
-    password: root
-  jpa:
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: false
-    hibernate:
-      ddl-auto: update
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: db_notifications
+      authentication-database: admin
+      username: root
+      password: root
+server:
+  port: 8082
 mq:
   queues:
     ms-notification: ms-notification
