@@ -18,7 +18,7 @@ public class MsNotificationSubscriber {
     private final NotificationRepository notificationRepository;
 
     @RabbitListener(queues = "${mq.queues.ms-notification}")
-    public void receberSolicitacaoEmissao(@Payload String payload) {
+    public void receberSolicitacaoEmissao(@Payload String payload) throws Exception {
         try {
             var mapper = new ObjectMapper();
             mapper.registerModule(new JavaTimeModule());
@@ -26,6 +26,7 @@ public class MsNotificationSubscriber {
             notificationRepository.save(data);
         } catch (Exception e) {
             log.error("Erro ao receber solicitacao de emissao de cartao: {} ", e.getMessage());
+            throw new Exception(e.getMessage());
         }
     }
 }
